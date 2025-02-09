@@ -1,15 +1,10 @@
 describe("Cadastro de Curso", () => {
-  const username = "grupo3-coordenador@gmail.com";
-  const password = "123deoliveira4";
 
   beforeEach(() => {
     cy.visit("/");
 
     // Fazer login
-    cy.get('input[id="id_login"]').type(username);
-    cy.get('input[id="id_password"]').type(password);
-    cy.get("button").contains("Entrar").click();
-    cy.url().should("contain", "/");
+    cy.loginCoordinator();
 
     cy.contains("a", "Acadêmico").click({ force: true });
     cy.contains("div", "Cursos").click({ force: true });

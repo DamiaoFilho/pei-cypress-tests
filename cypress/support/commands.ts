@@ -24,4 +24,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
+export {}
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      loginCoordinator() : Chainable<void>
+      goToAcademics() : Chainable<void>
+    }
+  }
+}
+
+Cypress.Commands.add('loginCoordinator', () => {
+    cy.fixture('login.json').then((login) => {
+      cy.visit('/')
+      cy.get('input[id="id_login"]').type(login.emailCoordinator)
+      cy.get('input[id="id_password"]').type(login.password)
+      cy.get('button[type="submit"]').click()
+    })
+})
